@@ -40,6 +40,8 @@ so we create widgets seperately
         }
 8. now we have our custom built widget called MyApp.
 9. still we may have errors because Stateless widget needs a key which kept coming from different classes by extending so we have to pass the key from our Class.
+
+
         class MyApp extends StatelessWidget
         {
             MyApp({super.key});
