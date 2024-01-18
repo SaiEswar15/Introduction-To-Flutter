@@ -33,9 +33,9 @@ class _CurrencyConverterCupertinoState extends State {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                "0",
-                style: TextStyle(
+              Text(
+                result.toString(),
+                style: const TextStyle(
                   fontSize: 45,
                   fontWeight: FontWeight.bold,
                 ),
