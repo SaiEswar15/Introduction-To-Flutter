@@ -12,26 +12,12 @@ class CurrencyConverter extends StatefulWidget
 class _CurrencyConverterState extends State<CurrencyConverter>
 {
 
-  @override
-  Widget build(BuildContext context)
-  {
-    return const Text("eswar");
-  }
-}
-
-
-
-
-class CurrencyConverterr extends StatelessWidget {
-
-  const CurrencyConverterr({super.key});
+  double result = 0;
+  final TextEditingController textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    double result = 0;
-
-    final TextEditingController textEditingController = TextEditingController();
-
+    
     const border = OutlineInputBorder(
       borderSide: BorderSide(
           color: Color.fromARGB(255, 0, 0, 0),
@@ -69,7 +55,7 @@ class CurrencyConverterr extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Container(
+              Container( //TextInput
                 margin: const EdgeInsets.all(8.0),
                 // color: Colors.amber,
                 // padding: const EdgeInsets.all(8.0),
@@ -97,13 +83,17 @@ class CurrencyConverterr extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
+              Container( //Button
                 margin: const EdgeInsets.all(8.0),
                 // color: Colors.amber,
                 // padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    result = double.parse(textEditingController.text) * 81;
+                    setState(()
+                    {
+                      result = double.parse(textEditingController.text) * 81;
+                    });
+                    
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
@@ -127,3 +117,8 @@ class CurrencyConverterr extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
