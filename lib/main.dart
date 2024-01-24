@@ -1,18 +1,46 @@
+import "dart:convert";
 import "package:flutter/material.dart";
 import "./Weather_App/main_screen_weather.dart";
+import "package:http/http.dart" as http;
+// import "Weather_App/secrets.dart";
+//api.openweathermap.org/data/2.5/weather?q=$cityName&APPID=$weatherApiKey
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  //Instead of writing the whole app inside a single runApp()
-  //we can break the code into modules so we create a class [MyApp] which
-  //extends the Stateless Widget. We will break the code into components
-  //and have them in our [MyApp] like AppBar, Card1 and Card2
+class MyApp extends StatefulWidget {
 
   @override
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  // final cityName = "London,uk";
+
+  Future<dynamic> getWeatherData() async {
+
+    final response = await http.get(Uri.parse(
+        "https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=8804292f320285f22a0cc2538cfd625a"
+      )
+    );
+    final data = await jsonDecode(response.body);
+    
+    print(data["coord"]["lon"]);
+
+  }
+
+  @override
+  void initState() {
+    
+    super.initState();
+    getWeatherData();
+
+  }
 
   @override
   Widget build(BuildContext context) {
