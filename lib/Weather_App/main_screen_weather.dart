@@ -4,6 +4,7 @@ import "./hourly_forecast_weather.dart";
 import 'package:flutter/material.dart';
 import "package:http/http.dart" as http;
 import "dart:convert";
+import "./secrets.dart";
 
 class WeatherScreen extends StatefulWidget {
   const WeatherScreen({super.key});
@@ -13,12 +14,14 @@ class WeatherScreen extends StatefulWidget {
 }
 
 class _WeatherScreenState extends State<WeatherScreen> {
-  // final cityName = "London,uk";
+  final cityName = "London,uk";
 
   
   double temperature = 0;
   late String type;
   late IconData icon ;
+
+
 
   Future<dynamic> getWeatherData() async {
 
@@ -28,7 +31,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
 
       // print("3");
       final response = await http.get(Uri.parse(
-          "https://api.openweathermap.org/data/2.5/forecast?q=London,uk&APPID=8804292f320285f22a0cc2538cfd625a"));
+          "https://api.openweathermap.org/data/2.5/forecast?q=$cityName,uk&APPID=$weatherApiKey"));
         
         // print("3.1");
 
