@@ -14,26 +14,44 @@ class WeatherScreen extends StatefulWidget {
 
 class _WeatherScreenState extends State<WeatherScreen> {
   // final cityName = "London,uk";
+
+  
   double temperature = 0;
   late String type;
   late IconData icon ;
 
   Future<dynamic> getWeatherData() async {
 
+    // print("2");
+
     try {
+
+      // print("3");
       final response = await http.get(Uri.parse(
           "https://api.openweathermap.org/data/2.5/forecast?q=London,uk&APPID=8804292f320285f22a0cc2538cfd625a"));
-      return await jsonDecode(response.body);
+        
+        // print("3.1");
 
-      
-    } catch (e) {
-      throw "failed to fetch data";
+        final data = await jsonDecode(response.body);
+        if(data["cod"] == 401)
+        {
+          return throw "failed to fetch data";
+        }
+        
+      return data;
+ 
+    } catch (error) {
+
+      // print("3.2");
+      return throw "Invalid user, Failed to fetch data :(";
     }
   }
 
   @override
   void initState() {
     super.initState();
+
+    // print("1");
   }
 
   @override
@@ -42,6 +60,8 @@ class _WeatherScreenState extends State<WeatherScreen> {
       future : getWeatherData(),
       builder :(context, snapshot) {
 
+        // print("4");
+
         if(snapshot.connectionState == ConnectionState.waiting)
         {
           return const Center(child: CircularProgressIndicator.adaptive());
@@ -49,7 +69,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
 
         if(snapshot.hasError)
         {
-          return Text("${snapshot.error}");
+          return Center(child: Text("${snapshot.error}"));
         }
 
         final data = snapshot.data!;
