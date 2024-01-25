@@ -14,14 +14,8 @@ class WeatherScreen extends StatefulWidget {
 }
 
 class _WeatherScreenState extends State<WeatherScreen> {
+
   final cityName = "London,uk";
-
-  
-  double temperature = 0;
-  late String type;
-  late IconData icon ;
-
-
 
   Future<dynamic> getWeatherData() async {
 
@@ -76,8 +70,13 @@ class _WeatherScreenState extends State<WeatherScreen> {
         }
 
         final data = snapshot.data!;
-        temperature = data["list"][0]["main"]["temp"];
-        type = data["list"][0]["weather"][0]["main"];
+        final temperature = data["list"][0]["main"]["temp"];
+        final type = data["list"][0]["weather"][0]["main"];
+        final humidity = data["list"][0]["main"]["humidity"] ;
+        final windSpeed = data["list"][0]["wind"]["speed"];
+        final pressure = data["list"][0]["main"]["pressure"];
+
+
 
         return Padding(
         padding: const EdgeInsets.all(16.0),
@@ -170,15 +169,15 @@ class _WeatherScreenState extends State<WeatherScreen> {
               ),
             ),
       
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 AdditionalForecast(
-                    icon: Icons.water_drop, type: "Humidity", value: "94"),
+                    icon: Icons.water_drop, type: "Humidity", value: humidity.toString()),
                 AdditionalForecast(
-                    icon: Icons.wind_power, type: "Wind Speed", value: "7.67"),
+                    icon: Icons.wind_power, type: "Wind Speed", value: windSpeed.toString()),
                 AdditionalForecast(
-                    icon: Icons.beach_access, type: "Pressure", value: "1006"),
+                    icon: Icons.beach_access, type: "Pressure", value: pressure.toString()),
               ],
             ),
       
