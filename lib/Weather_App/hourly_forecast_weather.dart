@@ -16,7 +16,7 @@ class HourlyForcastWidget extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Container(
-      width: 150,
+      width: 130,
       padding: const EdgeInsets.all(3),
       child: Card(
         elevation: 3,
@@ -27,21 +27,25 @@ class HourlyForcastWidget extends StatelessWidget {
             ),
             Text(
               time,
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                fontSize: 20, 
+                fontWeight: FontWeight.bold,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
             const SizedBox(
               height: 3,
             ),
             Icon(
               icon,
-              size: 50,
+              size: 40,
             ),
             const SizedBox(
               height: 5,
             ),
             Text(
               temperature,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
             ),
             const SizedBox(
               height: 10,

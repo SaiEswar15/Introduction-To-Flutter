@@ -136,23 +136,35 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
       
             //card2
-            const SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  HourlyForcastWidget(
-                      time: "09 : 00", icon: Icons.cloud, temperature: "301.17"),
-                  HourlyForcastWidget(
-                      time: "12 : 00", icon: Icons.cloud, temperature: "301.54"),
-                  HourlyForcastWidget(
-                      time: "15 : 00", icon: Icons.cloud, temperature: "301.11"),
-                  HourlyForcastWidget(
-                      time: "18 : 00", icon: Icons.cloud, temperature: "300.75"),
-                  HourlyForcastWidget(
-                      time: "20 : 00", icon: Icons.cloud, temperature: "301.81"),
-                  HourlyForcastWidget(
-                      time: "23 : 00", icon: Icons.cloud, temperature: "298.67"),
-                ],
+            // SingleChildScrollView(
+            //   scrollDirection: Axis.horizontal,
+            //   child: Row(
+            //     children: [
+            //       for(int i = 1;i<=40;i++)
+            //         const HourlyForcastWidget(
+            //           time: "09 : 00",
+            //           icon: Icons.cloud, 
+            //           temperature: "301.17"),
+            //     ],
+            //   ),
+            // ),
+
+            SizedBox(
+              height : 140,
+              child: ListView.builder(
+                itemCount: 20,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index){
+              
+                  final helper = data["list"][index+1];
+                  final typeHelper = helper["weather"][0]["main"];
+                  
+                  return HourlyForcastWidget(
+                        time: helper["dt"].toString(),
+                        icon: typeHelper == "Clouds" || typeHelper == "Rain" ? Icons.cloud : Icons.sunny, 
+                        temperature: helper["main"]["temp"].toString(),
+                      );
+                },
               ),
             ),
       
