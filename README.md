@@ -99,3 +99,54 @@ class CurrencyConverter extends StatelessWidget{
 }
 ```
 Now we go forward to design the interface
+
+# Printing in Flutter
+
+if you try to print anything in Flutter Project it will give you an error
+
+example :
+
+```dart
+onPressed: () {
+	print("hello");
+}
+```
+
+this is because any important data can be printed using this print() function so Flutter doesn’t allow printing.
+
+but you can do this by removing the `lint` provided by Flutter in your `analysis_options.yaml` file.
+
+```yaml
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  # The lint rules applied to this project can be customized in the
+  # section below to disable rules from the `package:flutter_lints/flutter.yaml`
+  # included above or to enable additional rules. A list of all available lints
+  # and their documentation is published at https://dart.dev/lints.
+  #
+  # Instead of disabling a lint rule for the entire project in the
+  # section below, it can also be suppressed for a single line of code
+  # or a specific dart file by using the `// ignore: name_of_lint` and
+  # `// ignore_for_file: name_of_lint` syntax on the line or in the file
+  # producing the lint.
+  rules:
+    # avoid_print: false  # Uncomment to disable the `avoid_print` rule
+    # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
+
+# Additional information about this file can be found at
+# https://dart.dev/guides/language/analysis-options
+```
+
+you can uncomment the avoid_print: false and then you can start printing but I would not recommend it.
+
+you can print it using `debugPrint`
+
+```dart
+onPressed: () {
+	debugPrint("hello");
+},
+```
+
+The other way is using the if condition and the debug mode.
+
