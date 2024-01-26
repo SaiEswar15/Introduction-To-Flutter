@@ -150,3 +150,39 @@ onPressed: () {
 
 The other way is using the if condition and the debug mode.
 
+# Button
+
+There are several types of buttons in Flutter's material.dart including:
+
+1. `FlatButton`: A text label displayed on a (zero elevation) `Material` widget. The button reacts to touches by filling with color.
+2. `RaisedButton`: A Material Design raised button. It contains ink splashes for a "pressed" state.
+
+For button we can get :
+
+- <ButtonStyle> style = ButtonStyle.
+    
+    with this make designs for the button.
+    
+    for all these constants inside the ButtonStyle use `MaterialStyleProperty` but since it is an abstract class we will use something that extends this `MaterialStyleProperty` which is nothing but `MaterialStatePropertyAll()`
+    
+
+```dart
+style: const ButtonStyle(
+  backgroundColor: MaterialStatePropertyAll(Colors.black),
+  foregroundColor: MaterialStatePropertyAll(Colors.white),
+  minimumSize: MaterialStatePropertyAll(
+    Size(double.infinity, 50),
+  ),
+  elevation: MaterialStatePropertyAll(10.0),
+  shape: MaterialStatePropertyAll(
+    ContinuousRectangleBorder(
+      borderRadius: BorderRadius.horizontal(
+        left: Radius.circular(10),
+        right: Radius.circular(10),
+      ),
+    ),
+  ),
+),
+```
+
+but writing this `MaterialStatePropertyAll` is time taking so there is a method which `ButtonStyle` gives us which is :
