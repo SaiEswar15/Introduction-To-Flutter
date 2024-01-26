@@ -53,3 +53,49 @@ so we create widgets seperately
             }
         }
 10. don't forget to override.
+
+### Breaking the code into modules/ components
+
+as we know already we have the MyApp in which we have the Hello World program and this will be our main class. now we break this into different modules 
+
+```dart
+import 'package: flutter/material.dart';
+import 'package:helloworld/currency_converter.dart';
+
+void main() {
+  runApp(const MyApp()); //const is a compile time mutable
+}
+
+class MyApp extends StatelessWidget {
+  
+
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: CurrencyConverter()
+    );
+  }
+}
+```
+
+```dart
+import 'package:flutter/material.dart';
+
+class CurrencyConverter extends StatelessWidget{
+
+  const CurrencyConverter({super.key});
+
+  @override
+  Widget build(BuildContext context)
+  {
+    return const Scaffold(
+        body: Center(
+          child: Text("hello world"),
+        ),
+      );
+  }
+}
+```
+Now we go forward to design the interface
