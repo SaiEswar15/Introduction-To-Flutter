@@ -1,1 +1,0 @@
-const weatherApiKey = "8804292f320285f22a0cc2538cfd625a";
