@@ -64,3 +64,18 @@ only now the font will be available for this particular Widget.
 
 --
 
+### theming the fonts :
+
+though from the above we were able to apply font for our widget but we have to apply the font for every widget manually which is not feasible. so we have to automate it so that we don’t have to keep applying the font for every widget which we can achieve by theming universally at the root widget which is MyApp
+
+```dart
+MaterialApp(
+      home: const Homepage(),
+      theme: ThemeData(
+        fontFamily: "DancingScript"
+      ),
+      debugShowCheckedModeBanner: false,
+    );
+```
+
+now if we don’t particularly add font for the widget it will by default be Dancing-Script or if added it will be overridden.
