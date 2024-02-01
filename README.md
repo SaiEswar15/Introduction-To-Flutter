@@ -79,3 +79,39 @@ MaterialApp(
 ```
 
 now if we don’t particularly add font for the widget it will by default be Dancing-Script or if added it will be overridden.
+
+--
+
+### Colour theming `ColorScheme` :
+
+for adding font-Family we have removed the ThemeData.dark() 
+
+so now we lost the colour theme of the project.
+
+now we need to find a way to add a colour theme for our project without the ThemeData.dark() method which is provided by ColorScheme
+
+```dart
+MaterialApp(
+      home: const Homepage(),
+      theme: ThemeData(
+        fontFamily: "DancingScript",
+        colorScheme: const ColorScheme.dark()
+      ),
+      debugShowCheckedModeBanner: false,
+    );
+```
+
+but if we want to give a color palette to the entire app we can use `ColorScheme()`
+
+```dart
+MaterialApp(
+      home: const Homepage(),
+      theme: ThemeData(
+        fontFamily: "DancingScript",
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber),
+      ),
+      debugShowCheckedModeBanner: false,
+    );
+```
+
+using from seed we will get the derivative colours for different stages like primary, secondary and various and we can assign manually by just using the `ColorScheme()` we have to pass in all manually but using from seed we don’t need to provide all this will automatically generate all the required coloured palette.
