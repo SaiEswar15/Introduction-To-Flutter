@@ -20,7 +20,6 @@ class Homepage extends StatelessWidget {
           child: Text(
             "Eswar",
             style : TextStyle(
-              fontFamily: "DancingScript",
               fontSize: 25,
             ),
           ),
