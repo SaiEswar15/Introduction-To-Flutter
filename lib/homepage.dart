@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 
 class Homepage extends StatelessWidget {
   const Homepage({super.key});
@@ -8,17 +8,20 @@ class Homepage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title : const Text(
-            "Just practicing"
+          title: const Text(
+            "OUTFIT GALLERY",
+            style : TextStyle(
+              fontFamily: "Honk",
+              fontSize: 25,
+            ),
           ),
         ),
         body: const Center(
           child: Text(
-            "hello",
+            "Eswar",
             style : TextStyle(
-              color: Colors.amber,
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
+              fontFamily: "DancingScript",
+              fontSize: 25,
             ),
           ),
         ),
