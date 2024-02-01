@@ -13,7 +13,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: const Homepage(),
       theme: ThemeData(
-        fontFamily: "DancingScript"
+        fontFamily: "DancingScript",
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber),
       ),
       debugShowCheckedModeBanner: false,
     );
