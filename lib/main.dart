@@ -24,6 +24,16 @@ class MyApp extends StatelessWidget {
             fontWeight: FontWeight.w900,
           ),
         ),
+        textTheme: const TextTheme(
+          titleMedium : TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+          bodySmall: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       debugShowCheckedModeBanner: false,
     );

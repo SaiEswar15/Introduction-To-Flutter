@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import "./products.dart";
+import "./product_card.dart";
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -14,10 +16,8 @@ class _HomepageState extends State<Homepage> {
 
   @override
   void initState() {
-    
     super.initState();
     selected = list[0];
-
   }
 
   @override
@@ -68,7 +68,6 @@ class _HomepageState extends State<Homepage> {
                 ),
               ],
             ),
-            
             ColoredBox(
               color: const Color.fromARGB(255, 255, 255, 255),
               child: SizedBox(
@@ -97,7 +96,6 @@ class _HomepageState extends State<Homepage> {
                 ),
               ),
             ),
-            
             ColoredBox(
               color: Colors.white,
               child: SizedBox(
@@ -112,7 +110,7 @@ class _HomepageState extends State<Homepage> {
                       child: ColoredBox(
                         color: Colors.white,
                         child: GestureDetector(
-                          onTap : (){
+                          onTap: () {
                             setState(() {
                               selected = list[index];
                             });
@@ -120,16 +118,20 @@ class _HomepageState extends State<Homepage> {
                           child: Chip(
                             label: Text(list[index]),
                             labelStyle: TextStyle(
-                              color : selected == list[index] ? Colors.black : Colors.white,
+                              color: selected == list[index]
+                                  ? Colors.black
+                                  : Colors.white,
                             ),
-                            backgroundColor: selected == list[index] ? Theme.of(context).primaryColor : Colors.lightGreen,
+                            backgroundColor: selected == list[index]
+                                ? Theme.of(context).primaryColor
+                                : Colors.lightGreen,
                             shape: const RoundedRectangleBorder(
                               side: BorderSide(
                                 color: Colors.grey,
                               ),
                               borderRadius: BorderRadius.horizontal(
-                                left : Radius.circular(30),
-                                right : Radius.circular(30),
+                                left: Radius.circular(30),
+                                right: Radius.circular(30),
                               ),
                             ),
                           ),
@@ -138,6 +140,21 @@ class _HomepageState extends State<Homepage> {
                     );
                   },
                 ),
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: products.length,
+                itemBuilder: (context, index) {
+                  final list = products;
+                  return ProductCard(
+                      title: list[index]["title"],
+                      price: list[index]["price"],
+                      picture: list[index]["image_url"] as String,
+                      bgcolor: index.isEven
+                          ? const Color.fromARGB(233, 195, 217, 254)
+                          : const Color.fromARGB(221, 225, 243, 251));
+                },
               ),
             ),
           ],
