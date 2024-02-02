@@ -115,3 +115,50 @@ MaterialApp(
 ```
 
 using from seed we will get the derivative colours for different stages like primary, secondary and various and we can assign manually by just using the `ColorScheme()` we have to pass in all manually but using from seed we don’t need to provide all this will automatically generate all the required coloured palette.
+
+--
+
+### Creating Navbar `SafeArea()`:
+
+Up until now, we have created a navbar by using the scaffold app bar but we want to create our navbar by removing the app bar from Scaffold.
+
+if we remove the app bar the consequence is that the text will go on to the top.
+
+to avoid this we have a widget called `SafeArea()`
+
+using this the project will ignore the space above and also the space below(notch)
+
+If we want our widgets to be side by Side we use the `Row()` widget.
+
+### `Expanded` :
+
+we have one widget in the row and the other widget is the input field there will be an error why?
+
+because the input field takes the entire screen.
+
+so give it a limited space we might think of using a `SizedBox()` but there will be an issue by doing so which appears different in different devices
+
+so we have to wrap the input text in `Expanded()`
+
+to make all the input fields similar we can theme it by using the input theme decoration 
+
+```dart
+theme: ThemeData(
+        fontFamily: "DancingScript",
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber),
+        inputDecorationTheme: const InputDecorationTheme(
+          hintStyle: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w900,
+            color: Colors.grey,
+          ),
+        ),
+```
+
+### `OutlinedInputBorder`
+
+if we want to give a border for the text field you will find it in the decoration and use the border.
+
+but for the border, we will have the Border() as an abstract class so we can use it.
+
+`OutlinedInputBorder`
