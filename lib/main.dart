@@ -15,6 +15,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: "DancingScript",
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber),
+        inputDecorationTheme: const InputDecorationTheme(
+          hintStyle: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w900,
+          ),
+        ),
       ),
       debugShowCheckedModeBanner: false,
     );

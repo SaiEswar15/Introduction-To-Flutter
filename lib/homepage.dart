@@ -5,25 +5,41 @@ class Homepage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text(
-            "OUTFIT GALLERY",
-            style : TextStyle(
-              fontFamily: "Honk",
-              fontSize: 25,
+    
+    const textborder = OutlineInputBorder(
+      borderSide: BorderSide(),
+      borderRadius: BorderRadius.horizontal(
+        left: Radius.circular(30),
+      ),
+    );
+
+    return const Scaffold(
+      body: SafeArea(
+          child: Row(
+        children: [
+          Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Text(
+              "Shoes\nCollections",
+              style: TextStyle(
+                fontSize: 25,
+              ),
             ),
           ),
-        ),
-        body: const Center(
-          child: Text(
-            "Eswar",
-            style : TextStyle(
-              fontSize: 25,
+          Expanded(
+            child: TextField(
+              decoration: InputDecoration(
+                border: textborder,
+                enabledBorder: textborder,
+                prefixIcon: Icon(
+                  Icons.search,
+                ),
+                hintText: "Search",
+              ),
             ),
           ),
-        ),
-      );
+        ],
+      )),
+    );
   }
 }
