@@ -14,7 +14,10 @@ class MyApp extends StatelessWidget {
       home: const Homepage(),
       theme: ThemeData(
         fontFamily: "DancingScript",
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.amber,
+          primary: Colors.amber,
+        ),
         inputDecorationTheme: const InputDecorationTheme(
           hintStyle: TextStyle(
             fontSize: 20,
