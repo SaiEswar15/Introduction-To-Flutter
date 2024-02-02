@@ -304,3 +304,125 @@ Chip(
 	    ),
 	  ),
 ```
+
+--
+
+### Creating the product items `ListViewBuilder()` `Image()`
+
+uncomment the assets from yaml file
+
+add the location in which the assets are present
+
+```yaml
+assets:
+    - assets/images/
+```
+
+add images to the location.
+
+create a mock data in another dart file
+
+```dart
+final List<Map<String,dynamic>> products = [
+  {
+    "id" : 0,
+    "title" : "Air Jordan Mens Shoes",
+    "price" : 20.5,
+    "sizes" : [8,9,10,11,12],
+    "image_url" : "assets/images/shoe0.jpg",
+    "brand" : "Nike"
+  },
+  {
+    "id" : 1,
+    "title" : "Onex virat version Mens Shoes",
+    "price" : 19.5,
+    "sizes" : [8,9,10,11,12],
+    "image_url" : "assets/images/shoe1.webp",
+    "brand" : "Puma"
+  },
+  {
+    "id" : 2,
+    "title" : "Tennis Rohit version Mens Shoes",
+    "price" : 22.1,
+    "sizes" : [8,9,10,12],
+    "image_url" : "assets/images/shoe2.jpg",
+    "brand" : "Adidas"
+  }
+];
+```
+
+use `ListViewBuilder()` to display and don't forget to give height with sized box (try Expanded)
+
+use constructor to fill the data and put the other class separate.
+
+```dart
+Expanded(
+              child: ListView.builder(
+                itemCount: products.length,
+                itemBuilder: (context, index) {
+                  final list = products;
+                  return ProductCard(
+                      title: list[index]["title"],
+                      price: list[index]["price"],
+                      picture: list[index]["image_url"] as String,
+                      bgcolor: index.isEven
+                          ? const Color.fromARGB(233, 195, 217, 254)
+                          : const Color.fromARGB(221, 225, 243, 251));
+                },
+              ),
+            ),
+```
+
+theming the fonts (title and body)
+
+```dart
+textTheme: const TextTheme(
+          titleMedium : TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+          bodySmall: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+```
+
+using the theme :
+
+```dart
+Text(
+      title,
+      style : Theme.of(context).textTheme.titleMedium,
+    ),
+```
+
+placing the image 
+
+```dart
+Image(
+	      image: AssetImage(picture),
+	      height : 175,
+	    ),
+```
+
+remember to not use color in Container when there is decoration. 
+
+use color inside decoration. to prevent errors.
+
+you can give padding, margin, decoration - border, border radius.
+
+```dart
+Container(
+      padding: const EdgeInsets.all(16.0),
+      margin :  const EdgeInsets.all(8.0),
+      decoration : BoxDecoration(
+        color: bgcolor,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      height : 270,
+      child: Column()
+);
+```
+
+--
