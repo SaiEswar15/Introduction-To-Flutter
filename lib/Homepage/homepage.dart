@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import "../products.dart";
 import './product_card_homepage.dart';
+import "../Productpage/productpage.dart";
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -10,7 +11,15 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  final List<String> list = const ["All", "Nike", "Adidas", "Puma", "Bata", "Crocs", "Roadstar"];
+  final List<String> list = const [
+    "All",
+    "Nike",
+    "Adidas",
+    "Puma",
+    "Bata",
+    "Crocs",
+    "Roadstar"
+  ];
 
   late String selected;
 
@@ -145,13 +154,24 @@ class _HomepageState extends State<Homepage> {
                 itemCount: products.length,
                 itemBuilder: (context, index) {
                   final list = products;
-                  return ProductCard(
-                      title: list[index]["title"],
-                      price: list[index]["price"],
-                      picture: list[index]["image_url"] as String,
-                      bgcolor: index.isEven
-                          ? const Color.fromARGB(233, 195, 217, 254)
-                          : const Color.fromARGB(221, 225, 243, 251));
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context){
+                            return Productpage(product: list[index]);
+                          },
+                        ),
+                      );
+                    },
+                    child: ProductCard(
+                        title: list[index]["title"],
+                        price: list[index]["price"],
+                        picture: list[index]["image_url"] as String,
+                        bgcolor: index.isEven
+                            ? const Color.fromARGB(233, 195, 217, 254)
+                            : const Color.fromARGB(221, 225, 243, 251)),
+                  );
                 },
               ),
             ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import "../products.dart";
+// import "../products.dart";
 
 class Productpage extends StatefulWidget {
   final Map<String, dynamic> product;
@@ -11,12 +11,16 @@ class Productpage extends StatefulWidget {
 }
 
 class _ProductpageState extends State<Productpage> {
+
   int selectedSize = 0;
+  Map<String, dynamic> selectedProduct = {};
+  
 
   @override
   void initState() {
     super.initState();
-    selectedSize = products[0]["sizes"]?[0];
+    selectedSize = widget.product["sizes"]?[0];
+    selectedProduct = widget.product;
   }
 
   @override
@@ -31,14 +35,14 @@ class _ProductpageState extends State<Productpage> {
             height: 5,
           ),
           Text(
-            products[0]["title"],
+            selectedProduct["title"],
             style: Theme.of(context).textTheme.titleLarge,
           ),
           const Spacer(flex: 1),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Image(
-              image: AssetImage(products[0]["image_url"]),
+              image: AssetImage(selectedProduct["image_url"]),
               height: 300,
             ),
           ),
@@ -54,7 +58,7 @@ class _ProductpageState extends State<Productpage> {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
-                    " \$ ${products[0]["price"]}",
+                    " \$ ${selectedProduct["price"]}",
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ),
@@ -64,18 +68,18 @@ class _ProductpageState extends State<Productpage> {
                     height: 50,
                     child: ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount: products[0]["sizes"].length,
+                        itemCount: selectedProduct["sizes"].length,
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             onTap: () {
                               setState(() {
-                                selectedSize = products[0]["sizes"][index];
+                                selectedSize = selectedProduct["sizes"][index];
                               });
                             },
                             child: Chip(
-                              label: Text("${products[0]["sizes"][index]}"),
+                              label: Text("${selectedProduct["sizes"][index]}"),
                               backgroundColor:
-                                  selectedSize == products[0]["sizes"][index]
+                                  selectedSize == selectedProduct["sizes"][index]
                                       ? Theme.of(context).colorScheme.primary
                                       : null,
                             ),
