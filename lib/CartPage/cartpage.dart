@@ -12,20 +12,60 @@ class CartPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title : const Text(
+        title: const Text(
           "cart",
         ),
       ),
-      body : ListView.builder(
+      body: ListView.builder(
         itemCount: cart.length,
-        itemBuilder: (context, index){
+        itemBuilder: (context, index) {
           return ListTile(
-            leading : CircleAvatar(
+            leading: CircleAvatar(
               backgroundImage: AssetImage(cart[index]["image_url"]),
             ),
-            title : Text("${cart[index]["title"]}"),
+            title: Text("${cart[index]["title"]}"),
             subtitle: Text("size : ${cart[index]["size"]}"),
-            trailing : const Icon(Icons.delete),
+            trailing: IconButton(
+                onPressed: () {
+                  showDialog(
+                    barrierDismissible: false,
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text("Delete Title",
+                              style: Theme.of(context).textTheme.titleMedium),
+                          content:
+                              const Text("Are you sure you want to delete?"),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text(
+                                "No",
+                                style : TextStyle(
+                                  color: Colors.green,
+                                ),
+                              ),
+                            ),
+
+                            TextButton(
+                              onPressed: () {
+                                Provider.of<CartProvider>(context, listen : false).removeProduct(cart[index]);
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text(
+                                "Yes",
+                                style : TextStyle(
+                                  color: Colors.red,
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      });
+                },
+                icon: const Icon(Icons.delete)),
           );
         },
       ),
