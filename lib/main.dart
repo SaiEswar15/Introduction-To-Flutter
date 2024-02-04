@@ -14,8 +14,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create : (context)=> CartProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create : (context)=> CartProvider()),
+      ],
       child: MaterialApp(
         home : const Homepage(),
         // home: Productpage(product : products[0]),
