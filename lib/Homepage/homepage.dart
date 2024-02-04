@@ -25,6 +25,7 @@ class _HomepageState extends State<Homepage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
               onTap : (value){
+                
                 setState(() {
                   currentpage = value;
                 }); 

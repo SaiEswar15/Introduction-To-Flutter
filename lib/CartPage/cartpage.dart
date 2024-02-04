@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import "../products.dart";
+import "package:provider/provider.dart";
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    print(Provider.of<String>(context));
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
