@@ -22,6 +22,7 @@ class _HomepageState extends State<Homepage> {
   ];
 
   late String selected;
+  int currentpage = 0;
 
   @override
   void initState() {
@@ -178,6 +179,24 @@ class _HomepageState extends State<Homepage> {
           ],
         ),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+              onTap : (value){
+                setState(() {
+                  currentpage = value;
+                }); 
+              },
+              currentIndex: currentpage,
+              items : const [
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home),
+                  label : "",
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.shopping_cart),
+                  label : "",
+                ),
+              ],
+            ),
     );
   }
 }
