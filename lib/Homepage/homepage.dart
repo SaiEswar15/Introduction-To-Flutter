@@ -19,13 +19,19 @@ class _HomepageState extends State<Homepage> {
     
 
     return Scaffold(
-      body: pages[currentpage],
+      body: IndexedStack(
+        index: currentpage,
+        children: pages,
+      ),
       bottomNavigationBar: BottomNavigationBar(
               onTap : (value){
                 setState(() {
                   currentpage = value;
                 }); 
               },
+              iconSize: 30,
+              selectedFontSize: 0,
+              unselectedFontSize: 0,
               currentIndex: currentpage,
               items : const [
                 BottomNavigationBarItem(
