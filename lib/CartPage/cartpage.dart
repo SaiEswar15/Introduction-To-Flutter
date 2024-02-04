@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import "../products.dart";
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
@@ -12,10 +13,18 @@ class CartPage extends StatelessWidget {
           "cart",
         ),
       ),
-      body : const Center(
-        child: Text(
-          "welcome to cart page"
-        ),
+      body : ListView.builder(
+        itemCount: cart.length,
+        itemBuilder: (context, index){
+          return ListTile(
+            leading : CircleAvatar(
+              backgroundImage: AssetImage(cart[index]["image_url"]),
+            ),
+            title : Text("${cart[index]["title"]}"),
+            subtitle: Text("size : ${cart[index]["size"]}"),
+            trailing : const Icon(Icons.delete),
+          );
+        },
       ),
     );
   }

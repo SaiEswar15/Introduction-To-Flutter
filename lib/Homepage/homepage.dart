@@ -11,7 +11,7 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   
-  int currentpage = 0;
+  int currentpage = 1;
   List<Widget> pages = const [ProductListHome(), CartPage()];
 
   @override
