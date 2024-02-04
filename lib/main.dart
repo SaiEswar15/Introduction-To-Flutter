@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:helloworld/providers/cart_provider.dart";
 import "./Homepage/homepage.dart";
 // import "./Productpage/productpage.dart";
 // import "./products.dart";
@@ -13,13 +14,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Provider(
-      create : (context)=> "hello world!!",
+    return ChangeNotifierProvider(
+      create : (context)=> CartProvider(),
       child: MaterialApp(
-        home : Provider(
-          create : (context)=> "Heyyy!!",
-          child: const Homepage()
-          ),
+        home : const Homepage(),
         // home: Productpage(product : products[0]),
         theme: ThemeData(
           useMaterial3: true,

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:helloworld/CartPage/cartpage.dart';
+import 'package:helloworld/providers/cart_provider.dart';
+import 'package:provider/provider.dart';
 // import "../products.dart";
 
 class Productpage extends StatefulWidget {
@@ -11,15 +14,13 @@ class Productpage extends StatefulWidget {
 }
 
 class _ProductpageState extends State<Productpage> {
-
   int selectedSize = 0;
   Map<String, dynamic> selectedProduct = {};
-  
 
   @override
   void initState() {
     super.initState();
-    selectedSize = widget.product["sizes"]?[0];
+    // selectedSize = widget.product["sizes"]?[0];
     selectedProduct = widget.product;
   }
 
@@ -78,10 +79,10 @@ class _ProductpageState extends State<Productpage> {
                             },
                             child: Chip(
                               label: Text("${selectedProduct["sizes"][index]}"),
-                              backgroundColor:
-                                  selectedSize == selectedProduct["sizes"][index]
-                                      ? Theme.of(context).colorScheme.primary
-                                      : null,
+                              backgroundColor: selectedSize ==
+                                      selectedProduct["sizes"][index]
+                                  ? Theme.of(context).colorScheme.primary
+                                  : null,
                             ),
                           );
                         }),
@@ -94,16 +95,45 @@ class _ProductpageState extends State<Productpage> {
                       backgroundColor: Theme.of(context).colorScheme.primary,
                       minimumSize: const Size(double.infinity, 50),
                     ),
-                    onPressed: () {},
-                    child: Row(
+                    onPressed: () {
+                      if (selectedSize != 0) {
+                        Provider.of<CartProvider>(context, listen: false)
+                            .addProduct({
+                          "id": selectedProduct["id"],
+                          "title": selectedProduct["title"],
+                          "price": selectedProduct["price"],
+                          "size": selectedSize,
+                          "image_url": selectedProduct["image_url"],
+                          "brand": selectedProduct["brand"]
+                        });
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Product added succesfully.."),
+                          ),
+                        );
+
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) {
+                            return const CartPage();
+                          }),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("please select a size."),
+                          ),
+                        );
+                      }
+                    },
+                    child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.shopping_cart),
+                        Icon(
+                          Icons.shopping_cart,
                           color: Colors.black,
                         ),
-                        const Text(
+                        Text(
                           "Add to cart",
                           style: TextStyle(
                             fontSize: 25,
