@@ -31,7 +31,7 @@ class _ProductListHomeState extends State<ProductListHome> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    // final size = MediaQuery.of(context).size;
 
     const textborder = OutlineInputBorder(
       borderSide: BorderSide(),
@@ -50,8 +50,7 @@ class _ProductListHomeState extends State<ProductListHome> {
       ),
     );
 
-    Color getColorForIndex(int index) 
-    {
+    Color getColorForIndex(int index) {
       if (index % 4 == 0) {
         // First index
         return const Color.fromARGB(233, 195, 217, 254);
@@ -61,6 +60,26 @@ class _ProductListHomeState extends State<ProductListHome> {
       } else {
         // Fourth index
         return const Color.fromARGB(233, 195, 217, 254);
+      }
+    }
+
+    SliverGridDelegateWithFixedCrossAxisCount getGridDelegate(double maxWidth) {
+      if (maxWidth >= 768 && maxWidth < 1024) {
+        return const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 1.5,
+        );
+      }
+      else if (maxWidth >= 1024) {
+        return const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 2,
+        );
+      } else {
+        return const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 1.2,
+        );
       }
     }
 
@@ -165,59 +184,62 @@ class _ProductListHomeState extends State<ProductListHome> {
             ),
           ),
           Expanded(
-            child: size.width > 620
-                ? GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 1.2,
-                    ),
-                    itemCount: products.length,
-                    itemBuilder: (context, index) {
-                      final list = products;
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return Productpage(product: list[index]);
-                              },
-                            ),
-                          );
-                        },
-                        child: ProductCard(
+            child: LayoutBuilder(builder: (context, constraints) {
+              // print(constraints.maxHeight);
+              // print(constraints.maxWidth);
+              
+              if (constraints.maxWidth > 620) {
+                return GridView.builder(
+                  gridDelegate: getGridDelegate(constraints.maxWidth),
+                  itemCount: products.length,
+                  itemBuilder: (context, index) {
+                    final list = products;
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return Productpage(product: list[index]);
+                            },
+                          ),
+                        );
+                      },
+                      child: ProductCard(
+                        title: list[index]["title"],
+                        price: list[index]["price"],
+                        picture: list[index]["image_url"] as String,
+                        bgcolor: getColorForIndex(index),
+                      ),
+                    );
+                  },
+                );
+              } else {
+                return ListView.builder(
+                  itemCount: products.length,
+                  itemBuilder: (context, index) {
+                    final list = products;
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return Productpage(product: list[index]);
+                            },
+                          ),
+                        );
+                      },
+                      child: ProductCard(
                           title: list[index]["title"],
                           price: list[index]["price"],
                           picture: list[index]["image_url"] as String,
-                          bgcolor: getColorForIndex(index),
-                        ),
-                      );
-                    },
-                  )
-                : ListView.builder(
-                    itemCount: products.length,
-                    itemBuilder: (context, index) {
-                      final list = products;
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return Productpage(product: list[index]);
-                              },
-                            ),
-                          );
-                        },
-                        child: ProductCard(
-                            title: list[index]["title"],
-                            price: list[index]["price"],
-                            picture: list[index]["image_url"] as String,
-                            bgcolor: index.isEven
-                                ? const Color.fromARGB(233, 195, 217, 254)
-                                : const Color.fromARGB(221, 225, 243, 251)),
-                      );
-                    },
-                  ),
+                          bgcolor: index.isEven
+                              ? const Color.fromARGB(233, 195, 217, 254)
+                              : const Color.fromARGB(221, 225, 243, 251)),
+                    );
+                  },
+                );
+              }
+            }),
           ),
         ],
       ),
