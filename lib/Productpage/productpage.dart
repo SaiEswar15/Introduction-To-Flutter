@@ -93,7 +93,7 @@ class _ProductpageState extends State<Productpage> {
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Theme.of(context).colorScheme.primary,
-                      minimumSize: const Size(double.infinity, 50),
+                      fixedSize : const Size(300, 50),
                     ),
                     onPressed: () {
                       if (selectedSize != 0) {

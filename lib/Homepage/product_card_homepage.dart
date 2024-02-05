@@ -26,7 +26,6 @@ class ProductCard extends StatelessWidget {
         color: bgcolor,
         borderRadius: BorderRadius.circular(20),
       ),
-      height : 270,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -47,7 +46,7 @@ class ProductCard extends StatelessWidget {
           Center(
             child: Image(
               image: AssetImage(picture),
-              height : 175,
+              height : 150,
             ),
           ),
         ],

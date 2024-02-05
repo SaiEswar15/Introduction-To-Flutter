@@ -4,7 +4,6 @@ import './product_card_homepage.dart';
 import "../Productpage/productpage.dart";
 
 class ProductListHome extends StatefulWidget {
-  
   const ProductListHome({super.key});
 
   @override
@@ -32,6 +31,8 @@ class _ProductListHomeState extends State<ProductListHome> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     const textborder = OutlineInputBorder(
       borderSide: BorderSide(),
       borderRadius: BorderRadius.horizontal(
@@ -48,6 +49,20 @@ class _ProductListHomeState extends State<ProductListHome> {
         ),
       ),
     );
+
+    Color getColorForIndex(int index) 
+    {
+      if (index % 4 == 0) {
+        // First index
+        return const Color.fromARGB(233, 195, 217, 254);
+      } else if (index % 4 == 1 || index % 4 == 2) {
+        // Second and third indices
+        return const Color.fromARGB(221, 225, 243, 251);
+      } else {
+        // Fourth index
+        return const Color.fromARGB(233, 195, 217, 254);
+      }
+    }
 
     return SafeArea(
       child: Column(
@@ -150,30 +165,59 @@ class _ProductListHomeState extends State<ProductListHome> {
             ),
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: products.length,
-              itemBuilder: (context, index) {
-                final list = products;
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return Productpage(product: list[index]);
+            child: size.width > 620
+                ? GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 1.2,
+                    ),
+                    itemCount: products.length,
+                    itemBuilder: (context, index) {
+                      final list = products;
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return Productpage(product: list[index]);
+                              },
+                            ),
+                          );
                         },
-                      ),
-                    );
-                  },
-                  child: ProductCard(
-                      title: list[index]["title"],
-                      price: list[index]["price"],
-                      picture: list[index]["image_url"] as String,
-                      bgcolor: index.isEven
-                          ? const Color.fromARGB(233, 195, 217, 254)
-                          : const Color.fromARGB(221, 225, 243, 251)),
-                );
-              },
-            ),
+                        child: ProductCard(
+                          title: list[index]["title"],
+                          price: list[index]["price"],
+                          picture: list[index]["image_url"] as String,
+                          bgcolor: getColorForIndex(index),
+                        ),
+                      );
+                    },
+                  )
+                : ListView.builder(
+                    itemCount: products.length,
+                    itemBuilder: (context, index) {
+                      final list = products;
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return Productpage(product: list[index]);
+                              },
+                            ),
+                          );
+                        },
+                        child: ProductCard(
+                            title: list[index]["title"],
+                            price: list[index]["price"],
+                            picture: list[index]["image_url"] as String,
+                            bgcolor: index.isEven
+                                ? const Color.fromARGB(233, 195, 217, 254)
+                                : const Color.fromARGB(221, 225, 243, 251)),
+                      );
+                    },
+                  ),
           ),
         ],
       ),
