@@ -1,3 +1,6 @@
+## Important message :
+go to branch flutterBasics for Flutter basics code and it has WeatherApp and CurrencyConverterApp in lib
+
 ## Creating a flutter app
 
 **Creating our first widget**
